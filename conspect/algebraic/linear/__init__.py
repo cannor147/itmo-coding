@@ -1,12 +1,12 @@
 import numpy as np
 
-from algebra.binary import binary_array
-from algebra.matrix import gaussian, transpose, from_permutation
-from coding.linear.gilbert_varshamov import gilbert_varshamov_bound_for_k, gilbert_varshamov_bound_for_d, \
+from algebraic.binary import binary_array
+from algebraic.matrix import gaussian, transpose, from_permutation
+from algebraic.linear.gilbert_varshamov import gilbert_varshamov_bound_for_k, gilbert_varshamov_bound_for_d, \
     gilbert_varshamov_bound_for_n
-from coding.linear.griesmer import griesmer_bound_for_k, griesmer_bound_for_d, griesmer_bound_for_n
-from coding.linear.hamming import hamming_bound_for_k, hamming_bound_for_d, hamming_bound_for_n
-from coding.linear.singleton import singleton_bound_for_k, singleton_bound_for_d, singleton_bound_for_n
+from algebraic.linear.griesmer import griesmer_bound_for_k, griesmer_bound_for_d, griesmer_bound_for_n
+from algebraic.linear.hamming import hamming_bound_for_k, hamming_bound_for_d, hamming_bound_for_n
+from algebraic.linear.singleton import singleton_bound_for_k, singleton_bound_for_d, singleton_bound_for_n
 
 
 def gen_to_check(g):

@@ -1,6 +1,6 @@
 import numpy as np
 
-from algebra.binary import to_array
+from algebraic.binary import to_array
 
 
 def transpose(mt):

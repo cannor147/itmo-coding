@@ -1,6 +1,6 @@
 import math
 
-from algebra import add_while, count_while
+from algebraic import add_while, count_while
 
 
 def gilbert_varshamov_bound(q, n, d):

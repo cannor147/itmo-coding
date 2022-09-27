@@ -1,6 +1,6 @@
 import math
 
-from algebra import add_while, count_while
+from algebraic import add_while, count_while
 
 
 def griesmer_bound(k, d):
