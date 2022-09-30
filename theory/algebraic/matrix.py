@@ -15,6 +15,10 @@ def from_permutation(p):
     return np.array([[1 if p[i] == j else 0 for j in range(len(p))] for i in range(len(p))])
 
 
+def project(vector, projector):
+    return np.array([vector[position] for position in projector])
+
+
 def gaussian(mt):
     n = len(mt)
     m = len(mt[0])
