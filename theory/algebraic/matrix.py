@@ -51,3 +51,20 @@ def gaussian(mt):
         for j in range(i):
             mc[j] -= mc[i] * mc[j][i]
     return mc, p
+
+
+def weight(v):
+    res = 0
+    for x in v:
+        res = x + res
+    return res
+
+
+def inc(u, one=1):
+    v = np.copy(u)
+    for i in range(len(v)):
+        old = v[i]
+        v[i] += one
+        if old > v[i]:
+            break
+    return v
