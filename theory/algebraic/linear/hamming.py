@@ -16,7 +16,7 @@ def hamming_bound_for_k(q, n, d):
 
 
 def hamming_bound_for_d(q, n, k):
-    return 2 * add_while(q ** (n - k), lambda t: math.comb(n, t) * ((q - 1) ** t)) + 1
+    return 2 * add_while(q ** (n - k), lambda t: math.comb(n, t) * ((q - 1) ** t))
 
 
 def count_spheres(q, n, t):

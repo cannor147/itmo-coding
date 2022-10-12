@@ -16,7 +16,7 @@ def gilbert_varshamov_bound_for_k(q, n, d):
 
 
 def gilbert_varshamov_bound_for_d(q, n, k):
-    return add_while(q ** (n - k) - 1, lambda d: calculate_addendum(q, n, d)) + 2
+    return add_while(q ** (n - k) - 1, lambda d: calculate_addendum(q, n, d)) + 1
 
 
 def calculate_addendum(q, n, i):
