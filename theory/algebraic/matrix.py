@@ -45,7 +45,7 @@ def row_echelon_form(mt):
     return mc
 
 
-def permutation_form(mt):
+def permutation_form(mt, clean=False):
     n, k = np.shape(mt)
     mc = np.copy(mt)
 
@@ -60,12 +60,19 @@ def permutation_form(mt):
                 mc[i] /= mc[i][j]
             for p in range(i + 1, n):
                 mc[p] -= mc[i] * mc[p][j]
+            if clean:
+                for p in range(0, i):
+                    mc[p] -= mc[i] * mc[p][j]
             break
     return mc
 
 
 def minimal_span_form(mt):
     return np.flip(permutation_form(np.flip(row_echelon_form(mt))))
+
+
+def minimal_form(mt):
+    return np.array(sorted(permutation_form(mt, clean=True), key=lambda x: tuple(x != 0), reverse=True))
 
 
 def gaussian(mt):

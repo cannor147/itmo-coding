@@ -27,10 +27,7 @@ class vector(list):
 
 
 def hamming_distance(u, v):
-    if u is vector and v is vector:
-        return abs(len(u) - len(v)) + sum([0 if u[i] == v[i] else 1 for i in range(min(len(u), len(v)))])
-    else:
-        return 0 if u == v else 1
+    return abs(len(u) - len(v)) + sum([0 if u[i] == v[i] else 1 for i in range(min(len(u), len(v)))])
 
 
 def bi_project(u, u_coordinates, v, v_coordinates, projection):

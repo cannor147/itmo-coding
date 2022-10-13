@@ -44,7 +44,7 @@ def decode_from_trellis(trellis, code):
 
     for i in range(n):
         for (u, v, f) in trellis[i]:
-            d = hamming_distance(f, code[i])
+            d = hamming_distance([f], [code[i]])
             path_d = distances[i][u]
             if v in distances[i + 1]:
                 distances[i + 1][v] = min(distances[i + 1][v], d + path_d)
@@ -57,7 +57,7 @@ def decode_from_trellis(trellis, code):
     for i in reversed(range(n)):
         min_u, min_d, min_f = None, max_d, None
         for (u, w, f) in trellis[i]:
-            d = hamming_distance(f, code[i])
+            d = hamming_distance([f], [code[i]])
             if distances[i][u] + d <= min_d and w == v:
                 min_d = distances[i][u] + d
                 min_u = u

@@ -1,6 +1,7 @@
 import numpy as np
 
-from algebraic.binary import binary_array
+from algebraic import describe_field, vector, hamming_distance
+from algebraic.binary import binary_array, unwrap
 from algebraic.matrix import gaussian, transpose, from_permutation
 from algebraic.linear.gilbert_varshamov import gilbert_varshamov_bound_for_k, gilbert_varshamov_bound_for_d, \
     gilbert_varshamov_bound_for_n
@@ -31,6 +32,62 @@ def check_to_gen(h):
 
     gs = np.append(binary_array(np.identity(k)), -transpose(s), axis=1)
     return np.dot(gs, from_permutation(p))
+
+
+def find_n_by_gen(g):
+    return np.shape(g)[1]
+
+
+def find_k_by_gen(g):
+    return sum([1 if np.count_nonzero(row != 0) > 0 else 0 for row in g])
+
+
+def find_d_by_syndromes(syndromes):
+    for e, vectors in syndromes.items():
+        if sum([1 if x != 0 else 0 for x in e]) != 0:
+            continue
+        d = None
+        for u in vectors:
+            for v in vectors:
+                if u == v:
+                    continue
+                dh = hamming_distance(u, v)
+                if d is None:
+                    d = dh
+                elif dh < d:
+                    d = dh
+        return d
+    return 0
+
+
+def syndromes_by_check(h, one=1):
+    ht = h.transpose()
+    r, n = np.shape(h)
+
+    vectors = describe_field(n, one=one)
+    syndromes = dict()
+    for v in vectors:
+        error = vector(np.array(v) @ ht)
+        if error in syndromes:
+            syndromes[error].append(v)
+        else:
+            syndromes[error] = [v]
+    return syndromes
+
+
+def leaders_of_syndromes(syndromes):
+    leaders = dict()
+    for e in syndromes.keys():
+        for v in syndromes[e]:
+            if e not in leaders:
+                leaders[e] = v
+                continue
+
+            weight = sum([1 if x != 0 else 0 for x in v])
+            leader_weight = sum([1 if x != 0 else 0 for x in leaders[e]])
+            if weight < leader_weight or (weight == leader_weight and str(v) > str(leaders[e])):
+                leaders[e] = v
+    return leaders
 
 
 def min_n(q, k, d, bound):
