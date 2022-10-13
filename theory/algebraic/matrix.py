@@ -19,6 +19,55 @@ def project(vector, projector):
     return np.array([vector[position] for position in projector])
 
 
+def row_echelon_form(mt):
+    n, k = np.shape(mt)
+    mc = np.copy(mt)
+
+    j = 0
+    for i in range(n):
+        while j < k:
+            if mc[i][j] == 0:
+                for p in range(i + 1, n):
+                    if mc[p][j] != 0:
+                        mc[i] += mc[p]
+                        break
+            if mc[i][j] != 0:
+                break
+            j += 1
+        if j >= k:
+            break
+
+        if mc[i][j] != 1:
+            mc[i] /= mc[i][j]
+        for p in range(i + 1, n):
+            mc[p] -= mc[i] * mc[p][j]
+        j += 1
+    return mc
+
+
+def permutation_form(mt):
+    n, k = np.shape(mt)
+    mc = np.copy(mt)
+
+    used_rows = set()
+    for j in range(k):
+        for i in range(n):
+            if i in used_rows or mc[i][j] == 0:
+                continue
+            used_rows.add(i)
+
+            if mc[i][j] != 1:
+                mc[i] /= mc[i][j]
+            for p in range(i + 1, n):
+                mc[p] -= mc[i] * mc[p][j]
+            break
+    return mc
+
+
+def minimal_span_form(mt):
+    return np.flip(permutation_form(np.flip(row_echelon_form(mt))))
+
+
 def gaussian(mt):
     n = len(mt)
     m = len(mt[0])
@@ -51,20 +100,3 @@ def gaussian(mt):
         for j in range(i):
             mc[j] -= mc[i] * mc[j][i]
     return mc, p
-
-
-def weight(v):
-    res = 0
-    for x in v:
-        res = x + res
-    return res
-
-
-def inc(u, one=1):
-    v = np.copy(u)
-    for i in range(len(v)):
-        old = v[i]
-        v[i] += one
-        if old > v[i]:
-            break
-    return v

@@ -1,6 +1,7 @@
 import numpy as np
 
-from algebraic.matrix import gaussian, inc, weight
+from algebraic.matrix import gaussian
+from algebraic import weight, inc
 
 
 def augment(g, row):
@@ -36,7 +37,7 @@ def auto_augment(g):
         result = augment(g, row)
         if gaussian(result)[0] is not None:
             return result
-        inc(row, one)
+        inc(row, one=one)
     return g
 
 
