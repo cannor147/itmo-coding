@@ -11,7 +11,6 @@ h = binary_array([
     [0, 0, 1, 1, 0, 1, 1, 1, 1, 1],
     [1, 1, 1, 1, 0, 1, 0, 0, 1, 1]
 ])
-ht = h.transpose()
 
 g = minimal_form(check_to_gen(h))
 

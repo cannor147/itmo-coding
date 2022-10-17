@@ -17,6 +17,3 @@ d1 = max_d(q=q, n=n, k=k, bound="hamming")
 d2 = max_d(q=q, n=n, k=k, bound="griesmer")
 d3 = max_d(q=q, n=n, k=k, bound="varshamov")
 print(d1, d2, d3)
-
-
-
