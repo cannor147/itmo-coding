@@ -47,7 +47,7 @@ def describe_field(k, one=1):
     return result
 
 
-def weight(v):
+def fsum(v):
     res = 0
     for x in v:
         res = x + res

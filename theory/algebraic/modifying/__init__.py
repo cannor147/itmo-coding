@@ -1,7 +1,7 @@
 import numpy as np
 
 from algebraic.matrix import gaussian
-from algebraic import weight, inc
+from algebraic import fsum, inc
 
 
 def augment(g, row):
@@ -33,7 +33,7 @@ def auto_augment(g):
     one = zero + 1
     n = np.shape(g)[1]
     row = np.array([one if i == 0 else zero for i in range(n)])
-    while weight(row) > 0:
+    while fsum(row) > 0:
         result = augment(g, row)
         if gaussian(result)[0] is not None:
             return result
@@ -46,7 +46,7 @@ def auto_expurgate(g):
     for i in range(k):
         result = expurgate(g, i)
         for j in range(n):
-            if weight(result[:, j]) == 0:
+            if fsum(result[:, j]) == 0:
                 continue
         return result
     return g
@@ -54,7 +54,7 @@ def auto_expurgate(g):
 
 def auto_extend(g):
     k = np.shape(g)[0]
-    return extend(g, [weight(g[i]) for i in range(k)])
+    return extend(g, [fsum(g[i]) for i in range(k)])
 
 
 def auto_puncture(g):

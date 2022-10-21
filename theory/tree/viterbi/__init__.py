@@ -1,6 +1,6 @@
 import numpy as np
 
-from algebraic import describe_field, vector, bi_project, hamming_distance, weight
+from algebraic import describe_field, vector, bi_project, hamming_distance, fsum
 from algebraic.matrix import minimal_span_form
 
 
@@ -32,7 +32,7 @@ def trellis_from_gen(g, one=1):
             for v in vertexes[i + 1]:
                 if u.project(intersections[i], active_rows[i]) == v.project(intersections[i], active_rows[i + 1]):
                     w = bi_project(u, active_rows[i], v, active_rows[i + 1], unions[i])
-                    f = weight(np.array(w) * np.array(x[i]))
+                    f = fsum(np.array(w) * np.array(x[i]))
                     edges[i].append((u, v, f))
     return edges
 
