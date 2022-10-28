@@ -107,3 +107,13 @@ def gaussian(mt):
         for j in range(i):
             mc[j] -= mc[i] * mc[j][i]
     return mc, p
+
+
+def hadamard_matrix(m, positive=1, negative=-1):
+    if m <= 0:
+        return np.array([[positive]])
+    elif m == 1:
+        return np.array([[positive, negative], [positive, positive]])
+
+    h = m // 2
+    return np.kron(hadamard_matrix(h, positive, negative), hadamard_matrix(m - h, positive, negative))
