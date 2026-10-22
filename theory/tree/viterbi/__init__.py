@@ -28,12 +28,15 @@ def trellis_from_gen(g, one=1):
 
     edges = [[] for _ in range(n)]
     for i in range(n):
+        singletons = [j for j in range(len(msg)) if msg[j, i] != 0 and np.count_nonzero(msg[j] != 0) == 1]
         for u in vertexes[i]:
             for v in vertexes[i + 1]:
                 if u.project(intersections[i], active_rows[i]) == v.project(intersections[i], active_rows[i + 1]):
                     w = bi_project(u, active_rows[i], v, active_rows[i + 1], unions[i])
                     f = fsum(np.array(w) * np.array(x[i]))
-                    edges[i].append((u, v, f))
+                    for a in describe_field(len(singletons), one=one):
+                        label = fsum([f] + [a[j] * msg[row, i] for j, row in enumerate(singletons)])
+                        edges[i].append((u, v, label))
     return edges
 
 

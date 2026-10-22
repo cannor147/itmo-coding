@@ -74,7 +74,5 @@ def auto_lengthen(g):
 
 
 def auto_shorten(g):
-    result = auto_expurgate(auto_puncture(g))
-    k, n = np.shape(g)
-    k0, n0 = np.shape(result)
-    return result if k0 + 1 == k and n0 + 1 == n else g
+    gs, p = gaussian(g)
+    return gs[1:, 1:][:, np.argsort(p[1:])]

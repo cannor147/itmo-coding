@@ -17,7 +17,7 @@ def gen_to_check(g):
     (gs, p) = gaussian(g)
     s = gs[:, k:n]
 
-    hs = np.append(-transpose(s), np.identity(k), axis=1)
+    hs = np.append(-transpose(s), np.identity(n - k), axis=1)
     return np.dot(hs, from_permutation(p))
 
 
@@ -28,7 +28,7 @@ def check_to_gen(h):
     (hs, p) = gaussian(h)
     hs = np.roll(hs, k - n, axis=1)
     p = np.roll(p, k - n)
-    s = hs[:, 0:n - k]
+    s = hs[:, 0:k]
 
     gs = np.append(binary_array(np.identity(k)), -transpose(s), axis=1)
     return np.dot(gs, from_permutation(p))

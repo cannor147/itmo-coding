@@ -3,4 +3,4 @@ def bsc_probability(x, y, p):
 
 
 def bsc_bhattacharyya(p):
-    return 2 * p - 2 * p * p
+    return 2 * (p * (1 - p)) ** 0.5
